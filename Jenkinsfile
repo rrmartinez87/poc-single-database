@@ -41,7 +41,7 @@ pipeline {
 	    }
 	    options {
                 azureKeyVault(
-                    credentialID: 'jenkins-sp-sql', 
+                    credentialID: 'jenkins-sp-sql2', 
                     keyVaultURL: 'https://sqlsdtfstatekv-test-01.vault.azure.net/', 
                     secrets: [
                         [envVariable: 'TF_VAR_client_id', name: 'spn-id', secretType: 'Secret'],
@@ -69,7 +69,7 @@ pipeline {
             }
 	    options {
                 azureKeyVault(
-                    credentialID: 'jenkins-sp-sql', 
+                    credentialID: 'jenkins-sp-sql2', 
                     keyVaultURL: 'https://sqlsdtfstatekv-test-01.vault.azure.net/', 
                     secrets: [
                         [envVariable: 'TF_VAR_client_id', name: 'spn-id', secretType: 'Secret'],
