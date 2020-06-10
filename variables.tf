@@ -107,6 +107,12 @@ variable "subnet_address_prefixes" {
     default     = ["10.0.1.0/24"]
 }
 
+variable "enforce_private_link_endpoint_policies" {
+    description = "Enable or Disable network policies for the private link endpoint on the subnet."
+    type = bool
+    default = true
+}
+
 // Private endopoint variables
 variable "private_endpoint_name" {
     description = "Specifies the Name of the Private Endpoint. Changing this forces a new resource to be created."
@@ -120,9 +126,21 @@ variable "service_connection_name" {
     default = "service_connection_name" 
 }
 
-// VNet rule name variable
-variable "vnet_rule_name" {
-    description = "he name of the SQL virtual network rule. Changing this forces a new resource to be created. Cannot be empty and must only contain alphanumeric characters and hyphens. Cannot start with a number, and cannot start or end with a hyphen."
+variable "requires_manual_approval" {
+    description = "Does the Private Endpoint require Manual Approval from the remote resource owner? Changing this forces a new resource to be created."
+    type = bool
+    default = false 
+}
+
+// Private DNS zone variables
+variable "private_dns_zone_name" {
+    description = "The name of the Private DNS Zone. Must be a valid domain name."
     type = string
-    default = "vnet-rule"  
+    default = "privatelink.database.windows.net"  
+}
+
+variable "private_dns_zone_vnet_link" {
+    description = "The name of the Private DNS Zone. Must be a valid domain name."
+    type = string
+    default = "private_dns_zone_vnet_link"  
 }
