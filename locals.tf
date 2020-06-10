@@ -7,4 +7,5 @@ locals {
   tls_version = "1.2"
   connection_type = "Redirect"
   separator = "-"
+  sample_database = "AdventureWorksLT"
 }
