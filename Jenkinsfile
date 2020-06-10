@@ -46,7 +46,7 @@ pipeline {
                     secrets: [
                         [envVariable: 'TF_VAR_client_id', name: 'spn-id', secretType: 'Secret'],
                         [envVariable: 'TF_VAR_client_secret', name: 'spn-secret', secretType: 'Secret'],
-                        [envVariable: 'StorageAccountAccessKey', name: 'storagekey', secretType: 'Secret']
+                        [envVariable: 'StorageAccountAccessKey', name: 'TerraformSASToken', secretType: 'Secret']
                     ]
                 )
             }
@@ -74,7 +74,7 @@ pipeline {
                     secrets: [
                         [envVariable: 'TF_VAR_client_id', name: 'spn-id', secretType: 'Secret'],
                         [envVariable: 'TF_VAR_client_secret', name: 'spn-secret', secretType: 'Secret'],
-                        [envVariable: 'StorageAccountAccessKey', name: 'storagekey', secretType: 'Secret']
+                        [envVariable: 'StorageAccountAccessKey', name: 'TerraformSASToken', secretType: 'Secret']
                     ]
                 )
             }		
