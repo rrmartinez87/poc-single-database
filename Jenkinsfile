@@ -1,4 +1,7 @@
 pipeline {
+ options {
+        timeout(time: 6, unit: 'HOURS') 
+    }
     parameters {
         choice(
             choices: ['create', 'destroy'],
@@ -7,9 +10,7 @@ pipeline {
         )
     }
     agent any
-    options {
-        timeout(time: 6, unit: 'HOURS') 
-    }	
+    	
     stages {
 
         stage('Az login') {
@@ -52,6 +53,7 @@ pipeline {
                         [envVariable: 'StorageAccountAccessKey', name: 'storagekey', secretType: 'Secret']
                     ]
                 )
+	       timeout(time: 6, unit: 'HOURS')
             }
 	        steps {
                 sh '''
