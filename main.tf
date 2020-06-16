@@ -146,3 +146,66 @@ resource "null_resource" "set_server_tls_version" {
     azurerm_private_endpoint.endpoint
   ]
 }
+
+//ip
+resource "azurerm_public_ip" "ip" {
+  name                    = var.azurerm_public_ip_name
+  location                = azurerm_resource_group.rg.location
+  resource_group_name     = azurerm_resource_group.rg.name
+  allocation_method       = var.azurerm_public_ip_allocation_method
+  idle_timeout_in_minutes = var.azurerm_public_ip_idle_timeout_in_minutes
+  tags = {
+    environment = var.azurerm_public_ip_enviroment
+  }
+}
+// Network Interface
+resource "azurerm_network_interface" "ni" {
+  name                = var.azurerm_network_interface_name
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  ip_configuration {
+    name                          = var.ip_configuration_name
+    subnet_id                     = azurerm_subnet.subnet.id
+    private_ip_address_allocation = var.private_ip_address_allocation
+    private_ip_address            = var.private_ip_address
+    public_ip_address_id          = azurerm_public_ip.ip.id
+
+  }
+}
+// virtual machine
+resource "azurerm_virtual_machine" "vm" {
+  name                  = var.azurerm_virtual_machine_name
+  location              = azurerm_resource_group.rg.location
+  resource_group_name   = azurerm_resource_group.rg.name
+  network_interface_ids = [azurerm_network_interface.ni.id]
+  vm_size               = var.azurerm_virtual_machine_vm_size
+
+  storage_image_reference {
+    publisher = var.storage_image_reference_publisher
+    offer     = var.storage_image_reference_offer
+    sku       = var.storage_image_reference_sku
+    version   = var.storage_image_reference_version
+  }
+
+  storage_os_disk {
+    name              = var.storage_os_disk_name
+    caching           = var.storage_os_disk_caching
+    create_option     = var.storage_os_disk_create_option
+    managed_disk_type = var.storage_os_disk_managed_disk_type
+  }
+
+    os_profile {
+    computer_name      = var.azurerm_virtual_machine_name
+    admin_username     = var.os_profile_admin_username 
+    admin_password     = var.os_profile_admin_password 
+  
+  }
+
+  os_profile_windows_config {
+    provision_vm_agent = var.os_profile_windows_config_provision_vm_agent
+  winrm  {  //Here defined WinRM connectivity config
+      protocol = var.os_profile_windows_config_protocol  
+    }
+  }
+}
