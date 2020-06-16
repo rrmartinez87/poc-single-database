@@ -1,25 +1,12 @@
 /*
-  Input variable definitions for an Azure SQL Single database resource and its dependences
+  Input variable definitions for an Azure SQL single database resource and its dependences
 */
-
-// Variables to indicate whether some resources should be created or not
-variable "create_resource_group" {
-    description = "Flag indicating whether the resource group must be created or use existing"
-    type = bool
-    default = true
-}
-
-variable "create_database_server" {
-    description = "Flag indicating whether the database server must be created or use existing"
-    type = bool
-    default = true
-}
 
 // Common variables definition
 variable "resource_group_name" { 
     description = "The name of the resource group in which to create the elastic pool. This must be the same as the resource group of the underlying SQL server."
     type = string
-    default = "rg-sql-singledb-poc"
+    default = "rg-singledb-poc"
 }
 
 variable "location" { 
@@ -41,7 +28,7 @@ variable "tags" {
 variable "server_name" { 
     description = "The name of the Microsoft SQL Server. This needs to be globally unique within Azure."
     type = string
-    default = "sql-db-server"
+    default = "sql-logical-server"
 }
 
 variable "server_version" { 
@@ -66,7 +53,7 @@ variable "administrator_login_password" {
 variable "single_database_name" { 
     description = "The name of the Ms SQL Database. Changing this forces a new resource to be created."
     type = string
-    default = "yuma-singledb"
+    default = "singledb-poc"
 }
 
 variable "service_tier" { 
@@ -85,13 +72,13 @@ variable "max_size_gb" {
 variable "vnet_name" {
     description = "The name of the virtual network. Changing this forces a new resource to be created."
     type = string
-    default = "vnet"
+    default = "vnet-test"
 }
 
 variable "vnet_address_space" {
     description = "The address space that is used the virtual network. You can supply more than one address space. Changing this forces a new resource to be created."
     type = string
-    default = "10.0.0.0/16"
+    default = "10.2.0.0/16"
 }
 
 // Subnet variables
@@ -104,13 +91,7 @@ variable "subnet_name" {
 variable "subnet_address_prefixes" {
     description = "The address prefixes to use for the subnet."
     type = list(string)
-    default     = ["10.0.1.0/24"]
-}
-
-variable "enforce_private_link_endpoint_policies" {
-    description = "Enable or Disable network policies for the private link endpoint on the subnet."
-    type = bool
-    default = true
+    default     = ["10.2.0.0/24"]
 }
 
 // Private endopoint variables
@@ -144,6 +125,8 @@ variable "private_dns_zone_vnet_link" {
     type = string
     default = "private_dns_zone_vnet_link"  
 }
+
+//--- Virtual machines variables for testing
  
 // Ip of the Virtual machine
 variable "azurerm_public_ip_name" {
