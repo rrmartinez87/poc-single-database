@@ -168,7 +168,7 @@ variable "private_ip_address_allocation" {
 variable "private_ip_address" {
     description = "private ip address allocation"
     type = string
-    default = "10.2.0.10"
+    default = "10.0.1.10"
 } 
 // Virtual machine to test connectiom
 variable "azurerm_virtual_machine_name" {
