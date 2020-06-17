@@ -29,11 +29,11 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
                     sh '''
-                    pwsh $azureAplicationId ="ea7672ef-f009-47fe-8b74-114a7d99b257"
-		    pwsh $azureTenantId= "c160a942-c869-429f-8a96-f8c8296d57db"
-		    pwsh $azurePassword = ConvertTo-SecureString "4420528e-9168-41fa-96c2-b78c99aff30c" -AsPlainText -Force
-                    pwsh $psCred = New-Object System.Management.Automation.PSCredential($azureAplicationId , $azurePassword)
-                    pwsh Connect-AzAccount -Credential $psCred -TenantId $azureTenantId  -ServicePrincipal  
+                    pwsh -c $azureAplicationId ="ea7672ef-f009-47fe-8b74-114a7d99b257"
+		    pwsh -c $azureTenantId= "c160a942-c869-429f-8a96-f8c8296d57db"
+		    pwsh -c $azurePassword = ConvertTo-SecureString "4420528e-9168-41fa-96c2-b78c99aff30c" -AsPlainText -Force
+                    pwsh -c $psCred = New-Object System.Management.Automation.PSCredential($azureAplicationId , $azurePassword)
+                    pwsh -c Connect-AzAccount -Credential $psCred -TenantId $azureTenantId  -ServicePrincipal  
                    '''
                 }
             }
