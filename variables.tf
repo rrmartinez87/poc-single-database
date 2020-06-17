@@ -91,7 +91,7 @@ variable "subnet_name" {
 variable "subnet_address_prefixes" {
     description = "The address prefixes to use for the subnet."
     type = list(string)
-    default     = ["10.0.2.0/24"]
+    default     = ["10.0.3.0/24"]
 }
 
 // Private endopoint variables
