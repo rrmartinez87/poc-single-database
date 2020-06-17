@@ -1,10 +1,12 @@
+/*
 // Azure provider configuration
 terraform {
   required_version = ">= 0.12"
   backend "azurerm" {}
+*/
 }
 provider "azurerm" {
-    version = "~>2.0"
+    version = "=2.13.0"
     features {}
 	subscription_id = "a7b78be8-6f3c-4faf-a43d-285ac7e92a05"
 	tenant_id       = "c160a942-c869-429f-8a96-f8c8296d57db"
