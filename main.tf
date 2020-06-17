@@ -129,20 +129,9 @@ resource "azurerm_private_dns_zone_virtual_network_link" "dnslink" {
 }
 
 // Create a DNS Zone Group to associate the private endpoint with the Private DNS Zone.
-resource "null_resource" "set_private_dns_zone_group" { 
+resource "null_resource" "set_private_dns_zone_config" { 
   provisioner local-exec {
-    command = <<EOT
-      $config = New-AzPrivateDnsZoneConfig `
-        -Name "privatelink.database.windows.net" `
-        -PrivateDnsZoneId ${azurerm_private_dns_zone.dnszone.id}
-
-      New-AzPrivateDnsZoneGroup -ResourceGroupName ${azurerm_resource_group.rg.name} `
-        -PrivateEndpointName ${azurerm_private_endpoint.endpoint.name} `
-        -name "MyZoneGroup" `
-        -PrivateDnsZoneConfig $config `
-    EOT
-
-    interpreter = ["pwsh", "-Command"]
+    command = "az network private-endpoint dns-zone-group create --endpoint-name ${azurerm_private_endpoint.endpoint.name} --name MyZoneGroup --private-dns-zone ${azurerm_private_dns_zone.dnszone.id} --resource-group ${azurerm_resource_group.rg.name} --zone-name 'privatelink.database.windows.net'"
   }
 
   depends_on = [
