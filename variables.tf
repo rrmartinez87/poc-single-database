@@ -163,7 +163,7 @@ variable "ip_configuration_name" {
 variable "private_ip_address_allocation" {
     description = "private ip address allocation"
     type = string
-    default = "static"
+    default = "Dynamic"
 }
 variable "private_ip_address" {
     description = "private ip address allocation"
