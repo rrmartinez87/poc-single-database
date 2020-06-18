@@ -215,6 +215,7 @@ resource "azurerm_virtual_machine" "vm" {
       protocol = var.os_profile_windows_config_protocol  
     }
   }
+}
 //  virtual machine extension
 resource "azurerm_virtual_machine_extension" "vm_extension" {
   name                       = var.vm_extension_name
@@ -230,5 +231,5 @@ resource "azurerm_virtual_machine_extension" "vm_extension" {
     }
 SETTINGS
 }
-}
+
 	
