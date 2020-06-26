@@ -13,8 +13,8 @@ create_server_admin_secret = false
 server_admin_password = "Passw0rd"
 server_admin_key_vault_secret_name = "sqlsvr-admin"
 server_admin_key_vault_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-kv/providers/Microsoft.KeyVault/vaults/yuma-keys"
-azuread_admin_login = "juanmauricio.garzon@globant.com"
-azuread_admin_object_id = "7b1a20dd-eaad-4b76-abbf-c170410f6b46"
+azuread_admin_login = "rafael.martinez@globant.com"
+azuread_admin_object_id = "adc78f07-0628-4143-aa66-3b69bf3ff237"
 
 //--- Single database variables
 single_database_name = "singledb-mvp"
