@@ -11,7 +11,7 @@ terraform {
 //--- Azure provider configuration
 provider "azurerm" {
     version = "=2.13.0"
-    subscription_id = "a7b78be8-6f3c-4faf-a43d-285ac7e92a05"
+    subscription_id = "a265068d-a38b-40a9-8c88-fb7158ccda23"
     features {}
 }
 
