@@ -9,16 +9,16 @@ tags = {
 //--- Database server variables
 server_name = "yuma-sqlsvr2"
 server_admin_login = "yuma-sqlusr"
-create_server_admin_secret = true
+create_server_admin_secret = false
 server_admin_password = "Passw0rd"
 server_admin_key_vault_secret_name = "sqlsvr-admin"
-server_admin_key_vault_id = "/subscriptions/a7b78be8-6f3c-4faf-a43d-285ac7e92a05/resourceGroups/rg-sql-kv/providers/Microsoft.KeyVault/vaults/yuma-keys"
+server_admin_key_vault_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-kv/providers/Microsoft.KeyVault/vaults/yuma-keys"
 azuread_admin_login = "rafael.martinez@globant.com"
 azuread_admin_object_id = "adc78f07-0628-4143-aa66-3b69bf3ff237"
 
 //--- Single database variables
 single_database_name = "singledb-mvp"
-//database_server_id = "/subscriptions/a7b78be8-6f3c-4faf-a43d-285ac7e92a05/resourceGroups/thesqlgroup/providers/Microsoft.Sql/servers/yuma-sqlsvr"
+//database_server_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/thesqlgroup/providers/Microsoft.Sql/servers/yuma-sqlsvr"
 service_tier = "Basic"
 max_size_gb = 2
 
