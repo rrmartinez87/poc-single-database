@@ -16,10 +16,8 @@ pipeline {
         stage('Az login') {
             steps {
                 withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
-                   sh '''
-                   az account clear
-                   az login -u rafael.martinez@globant.com -p $Az_pass
-                   az account set -s a7b78be8-6f3c-4faf-a43d-285ac7e92a05
+                   pwsh '''
+                   Connect-AzAccount -Credential $Credential -Tenant 'xxxx-xxxx-xxxx-xxxx' -ServicePrincipal
                    '''
                 cleanWs()
 		}
