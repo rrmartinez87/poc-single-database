@@ -16,7 +16,7 @@ pipeline {
         stage('Az login') {
             steps {
                 withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
-                    sh '''
+                    pwsh '''
                    az account clear
                    az login -u rafael.martinez@globant.com -p $Az_pass
                    az account set -s a7b78be8-6f3c-4faf-a43d-285ac7e92a05
@@ -37,7 +37,7 @@ pipeline {
                  def tfHome = tool name: 'Terraform'
                   env.PATH = "${tfHome}:${env.PATH}"
              }
-                sh 'terraform -version'
+                pwsh 'terraform -version'
             }
         }
         stage('Terraform Apply') {
@@ -57,7 +57,7 @@ pipeline {
 	       timeout(time: 6, unit: 'HOURS')
             }
 	        steps {
-                sh '''
+                pwsh '''
 		export TF_VAR_client_id=$TF_VAR_client_id
                 export TF_VAR_client_secret=$TF_VAR_client_secret
 		terraform init -no-color -backend-config="storage_account_name=sqlsdtfstatestgtest" \
@@ -85,7 +85,7 @@ pipeline {
                 )
             }		
             steps {
-            sh '''
+            pwsh '''
             export TF_VAR_client_id=$TF_VAR_client_id
             export TF_VAR_client_secret=$TF_VAR_client_secret
             terraform init -no-color -backend-config="storage_account_name=sqlsdtfstatestgtest" \
