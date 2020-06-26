@@ -17,6 +17,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
                    pwsh '''
+		   $Credential = Get-Credential
                    Connect-AzAccount -Credential $Credential -Tenant 'xxxx-xxxx-xxxx-xxxx' -ServicePrincipal
                    '''
                 cleanWs()
