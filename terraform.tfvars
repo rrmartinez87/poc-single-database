@@ -18,7 +18,7 @@ azuread_admin_object_id = "adc78f07-0628-4143-aa66-3b69bf3ff237"
 
 //--- Single database variables
 single_database_name = "singledb-mvp"
-//database_server_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/thesqlgroup/providers/Microsoft.Sql/servers/yuma-sqlsvr"
+//database_server_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/thesqlgroup2/providers/Microsoft.Sql/servers/yuma-sqlsvr2"
 service_tier = "Basic"
 max_size_gb = 2
 
