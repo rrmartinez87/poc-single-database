@@ -1,7 +1,4 @@
 pipeline {
- options {
-        timeout(time: 6, unit: 'HOURS') 
-    }
     parameters {
         choice(
             choices: ['create', 'destroy'],
@@ -38,7 +35,7 @@ pipeline {
                  def tfHome = tool name: 'Terraform'
                   env.PATH = "${tfHome}:${env.PATH}"
              }
-                pwsh 'terraform -version'
+                 sh 'terraform -version'
             }
         }
         stage('Terraform Apply') {
@@ -55,7 +52,7 @@ pipeline {
                         [envVariable: 'StorageAccountAccessKey', name: 'storagekey', secretType: 'Secret']
                     ]
                 )
-	       timeout(time: 6, unit: 'HOURS')
+	       
             }
 	        steps {
                 pwsh '''
