@@ -55,15 +55,15 @@ pipeline {
 	       
             }
 	        steps {
-                pwsh '''
+                sh '''
 		export TF_VAR_client_id=$TF_VAR_client_id
                 export TF_VAR_client_secret=$TF_VAR_client_secret
 		terraform init -no-color -backend-config="storage_account_name=sqlsdtfstatestgtest" \
                 -backend-config="container_name=sqlsdtfstate" \
                 -backend-config="access_key=$StorageAccountAccessKey" \
                 -backend-config="key=terraform.tfstate"
-		pwsh -c terraform plan -no-color -out out.plan
-                pwsh -c terraform apply -no-color out.plan
+		 terraform plan -no-color -out out.plan
+                 terraform apply -no-color out.plan
                 '''
             }
         }
