@@ -17,7 +17,7 @@ pipeline {
                        az account clear
                        az login -u rafael.martinez@globant.com -p $Az_pass
                        az account set -s a7b78be8-6f3c-4faf-a43d-285ac7e92a05
-		       pwsh
+		       sh
 		       '''
 			cleanWs()
 		}
@@ -63,7 +63,8 @@ pipeline {
                 -backend-config="access_key=$StorageAccountAccessKey" \
                 -backend-config="key=terraform.tfstate"
 		 terraform plan -no-color -out out.plan
-                 pwsh -c terraform apply -no-color out.plan
+                 pwsh
+		 terraform apply -no-color out.plan
                 '''
             }
         }
@@ -83,7 +84,7 @@ pipeline {
                 )
             }		
             steps {
-            pwsh '''
+            sh '''
             export TF_VAR_client_id=$TF_VAR_client_id
             export TF_VAR_client_secret=$TF_VAR_client_secret
             terraform init -no-color -backend-config="storage_account_name=sqlsdtfstatestgtest" \
