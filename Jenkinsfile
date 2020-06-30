@@ -12,16 +12,14 @@ pipeline {
 
    stage('Az login') {
             steps {
-                withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
-                   pwsh "get-date"
-			pwsh "$User = 'globant\rafael.martinez'"
-		        pwsh "$PWord = ConvertTo-SecureString -String '{$Az_pass}' -AsPlainText -Force"
-                        pwsh "$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord"
-		        pwsh "Connect-AzAccount -Credential $Credential -Tenant 'c160a942-c869-429f-8a96-f8c8296d57db' -ServicePrincipal"
+                pwsh "$azureAplicationId ='ea7672ef-f009-47fe-8b74-114a7d99b257'"
+		pwsh "$azureTenantId= 'c160a942-c869-429f-8a96-f8c8296d57db'"
+		pwsh "$azurePassword = ConvertTo-SecureString '4420528e-9168-41fa-96c2-b78c99aff30c' -AsPlainText -Force"
+		pwsh "$psCred = New-Object System.Management.Automation.PSCredential($azureAplicationId , $azurePassword)"
+		pwsh "Connect-AzAccount -Credential $psCred -TenantId $azureTenantId  -ServicePrincipal"
 			cleanWs()
 		}
-            }
-   }	        	
+            }	        	
         stage('Clone repository') {
         steps {
             git branch: 'master', credentialsId: 'Github', url: 'https://github.com/rrmartinez87/poc-single-database.git'
