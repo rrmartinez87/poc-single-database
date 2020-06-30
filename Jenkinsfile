@@ -10,16 +10,13 @@ pipeline {
     	
     stages {
 
-  stage('Az login') {
+stage('Az login') {
             steps {
-                withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
-                       sh '''
-                       az account clear
-                       az login -u rafael.martinez@globant.com -p $Az_pass
-                       az account set -s a265068d-a38b-40a9-8c88-fb7158ccda23
-		       sh
-		       '''
-			cleanWs()
+withCredentials([azureServicePrincipal('jenkins-sp-sql2')]) {
+pwsh "$User = 'rafael.martinez@globant.com'"
+pwsh "$PWord = ConvertTo-SecureString -String $AZURE_CLIENT_SECRET -AsPlainText -Force"
+pwsh "$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord"
+pwsh "Connect-AzAccount -Credential $Credential -Tenant $AZURE_TENANT_ID -ServicePrincipal"
         }
     }
 }
