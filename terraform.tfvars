@@ -12,7 +12,7 @@ tags = {
 //------------------------------
 server_name = "yuma-sqlsvr2"
 server_admin_login = "yuma-sqlusr"
-create_server_admin_secret = false
+create_server_admin_secret = true
 server_admin_password = "Passw0rd"
 server_admin_key_vault_secret_name = "sqlsvr-admin"
 server_admin_key_vault_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-support/providers/Microsoft.KeyVault/vaults/yuma-keys"
