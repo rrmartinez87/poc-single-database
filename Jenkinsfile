@@ -13,10 +13,10 @@ pipeline {
   stage('Az login') {
             steps {
                 withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
-                      pwsh "$applicationId = "ea7672ef-f009-47fe-8b74-114a7d99b257""
-		      pwsh "$securePassword = "4420528e-9168-41fa-96c2-b78c99aff30c" | ConvertTo-SecureString -AsPlainText -Force"
+                      pwsh "$applicationId = 'ea7672ef-f009-47fe-8b74-114a7d99b257'"
+		      pwsh "$securePassword = '4420528e-9168-41fa-96c2-b78c99aff30c' | ConvertTo-SecureString -AsPlainText -Force"
                       pwsh "$credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $applicationId, $securePassword"
-                      pwsh "connect-AzureRmAccount -ServicePrincipal -Credential $credential -TenantId "c160a942-c869-429f-8a96-f8c8296d57db""
+                      pwsh "connect-AzureRmAccount -ServicePrincipal -Credential $credential -TenantId 'c160a942-c869-429f-8a96-f8c8296d57db'"
 		      
 			cleanWs()
 		}
