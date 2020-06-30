@@ -64,7 +64,7 @@ resource "null_resource" "set_tls_version" {
                 -MinimalTlsVersion ${local.tls_version}
         EOT
 
-        //interpreter = ["pwsh", "-Command"]
+        interpreter = ["pwsh", "-Command"]
     }
 
     // Setting TLS version requires a previously logical database server to be created
