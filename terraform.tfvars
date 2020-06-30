@@ -38,18 +38,17 @@ elastic_pool_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceG
 
 //--- Private Endpoint variables
 //-------------------------------
-vnet_resource_group = "rg-sql-single-database2"
+vnet_resource_group = "rg-sql-support"
 private_endpoint_name = "private-endpoint"
-subnet_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-single-database2/providers/Microsoft.Network/virtualNetworks/vnet-endpoint/subnets/subnet-endpoint"
+subnet_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-support/providers/Microsoft.Network/virtualNetworks/vnet-endpoint/subnets/subnet-endpoint"
 private_service_connection_name = "any_optinal_name"
-vnet_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-single-database2/providers/Microsoft.Network/virtualNetworks/vnet-endpoint"
+vnet_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-support/providers/Microsoft.Network/virtualNetworks/vnet-endpoint"
 
 //--- DNS configuration
 private_dns_zone_name = "privatelink.database.windows.net"
 private_dns_zone_vnet_link_name = "private_dsn_zone_vnet_link"
 private_dns_zone_config_name = "private_dns_zone_config_name"
 private_dns_zone_group_name = "private_dns_zone_group_name"
-<<<<<<< HEAD
 
 
 //--- VNet/Subnet
@@ -58,5 +57,3 @@ vnet_name = "vnet-endpoint"
 vnet_address_space = "10.0.0.0/16"
 subnet_name = "subnet-endpoint"
 subnet_address_prefixes = ["10.0.1.0/24"]
-=======
->>>>>>> 77214a81c29d40de178d4ea00123500e7041e62b
