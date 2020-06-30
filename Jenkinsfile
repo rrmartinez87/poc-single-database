@@ -8,17 +8,28 @@ pipeline {
     }
     agent any
     	
-    stages {
+   stages {
+    stage('Az login') {
+	     steps {
+		withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
+		sh '''
+		az account clear
+		az login -u rafael.martinez@globant.com -p $Az_pass
+		az account set -s a265068d-a38b-40a9-8c88-fb7158ccda23
+		sh
+		'''
+		cleanWs()
+	        }
+    		}	
+		}
 
-  stage('Az login') {
+  stage('Az Account') {
 steps {
              pwsh '''
-             install-module -name az -allowclobber -force
              $password = ConvertTo-SecureString -String "UxzPCy-xSL.2-aT707dE_T-2_mayDMBm21" -AsPlainText -Force
              $Credential = New-Object System.Management.Automation.PSCredential ('c6b8d3e1-b3ca-46fb-93af-d9348f3cd8a5', $password)
              Connect-AzAccount -Credential $Credential -Tenant 'c160a942-c869-429f-8a96-f8c8296d57db' -ServicePrincipal -Subscription 'a265068d-a38b-40a9-8c88-fb7158ccda23'
-	     Set-AzSqlServer
-            '''
+	     '''
          }
 }
         stage('Clone repository') {
@@ -38,8 +49,8 @@ steps {
         stage('Terraform Apply') {
             when {
                 expression { params.REQUESTED_ACTION == 'create'}
-	    }
-	    options {
+		 }
+		options {
                 azureKeyVault(
                     credentialID: 'jenkins-sp-sql2', 
                     keyVaultURL: 'https://sqlsdtfstatekv-test-01.vault.azure.net/', 
@@ -51,6 +62,7 @@ steps {
                 )
 	       
             }
+	    
 	        steps {
                 sh '''
 		export TF_VAR_client_id=$TF_VAR_client_id
