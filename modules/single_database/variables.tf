@@ -27,22 +27,13 @@ variable "service_tier" {
 variable "max_size_gb" { 
     description = "The max size of the database in gigabytes."
     type = number
-    default = 1
+    default = null
 }
 
 variable "collation" { 
     description = "Specifies the collation of the database. Changing this forces a new resource to be created."
     type = string
     default = "SQL_Latin1_General_CP1_CI_AS"
-}
-
-variable "elastic_pool_id" { 
-    description = <<EOT
-        Specifies the ID of the elastic pool containing this database.
-        Changing this forces a new resource to be created.
-        EOT
-    type = string
-    default = null
 }
 
 variable "license_type" { 
@@ -70,7 +61,7 @@ variable "min_vcores_capacity" {
         This property is only settable for General Purpose Serverless databases.
         EOT
     type = number
-    default = 1
+    default = null
 }
 
 variable "secondary_replicas_count" { 
@@ -91,6 +82,15 @@ variable "zone_redundant" {
         EOT
     type = bool
     default = false
+}
+
+variable "elastic_pool_id" { 
+    description = <<EOT
+        Specifies the ID of the elastic pool containing this database.
+        Changing this forces a new resource to be created.
+        EOT
+    type = string
+    default = null
 }
 
 variable "tags" { 

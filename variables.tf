@@ -19,8 +19,15 @@ variable "tags" {
     type = map
 }
 
+
 //--- Database server variables
 //-----------------------------
+variable "create_database_server" { 
+    description = "Flag that indicates whether the database server should be created or not."
+    type = bool
+    default = true
+}
+
 variable "server_name" { 
     description = "The name of the Microsoft SQL Server. This needs to be globally unique within Azure."
     type = string
@@ -32,9 +39,9 @@ variable "server_admin_login"  {
 }
 
 variable "server_admin_password"  { 
-    description = "The administrator password for the new server when create_server_admin_secret is true"
+    description = "The administrator password for the new server, required when create_server_admin_secret is true"
     type = string
-    default = ""
+    default = null
 }
 
 variable "create_server_admin_secret"  { 
@@ -63,29 +70,19 @@ variable "azuread_admin_object_id"  {
     type = string
 }
 
-variable "azuread_tenant_id"  { 
+variable "azuread_admin_tenant_id"  { 
     description = "The tenant id of the Azure AD Administrator of this SQL Server."
     type = string
     default = null
 }
 
+
 //--- Single database variables
 //-----------------------------
-
 variable "single_database_name" { 
     description = "The name of the Ms SQL Database. Changing this forces a new resource to be created."
     type = string
 }
-
-/*
-variable "database_server_id" { 
-    description = <<EOT
-        The id of the Ms SQL Server on which to create the database.
-        Changing this forces a new resource to be created.
-        EOT
-    type = string
-}
-*/
 
 variable "service_tier" { 
     description = <<EOT
@@ -99,31 +96,13 @@ variable "service_tier" {
 variable "max_size_gb" { 
     description = "The max size of the database in gigabytes."
     type = number
-    default = 1
-}
-
-variable "auto_pause_delay_in_minutes" { 
-    description = <<EOT
-        Time in minutes after which database is automatically paused. A value of -1 means that automatic
-        pause is disabled. This property is only settable for General Purpose Serverless databases.
-        EOT
-    type = number
-    default = -1
+    default = null
 }
 
 variable "collation" { 
     description = "Specifies the collation of the database. Changing this forces a new resource to be created."
     type = string
     default = "SQL_Latin1_General_CP1_CI_AS"
-}
-
-variable "elastic_pool_id" { 
-    description = <<EOT
-        Specifies the ID of the elastic pool containing this database.
-        Changing this forces a new resource to be created.
-        EOT
-    type = string
-    default = null
 }
 
 variable "license_type" { 
@@ -135,13 +114,22 @@ variable "license_type" {
     default = "BasePrice"
 }
 
+variable "auto_pause_delay_in_minutes" { 
+    description = <<EOT
+        Time in minutes after which database is automatically paused. A value of -1 means that automatic
+        pause is disabled. This property is only settable for General Purpose Serverless databases.
+        EOT
+    type = number
+    default = -1
+}
+
 variable "min_vcores_capacity" { 
     description = <<EOT
         Minimal vCores capacity that database will always have allocated, if not paused.
         This property is only settable for General Purpose Serverless databases.
         EOT
     type = number
-    default = 1
+    default = null
 }
 
 variable "secondary_replicas_count" { 
@@ -162,4 +150,69 @@ variable "zone_redundant" {
         EOT
     type = bool
     default = false
+}
+
+variable "elastic_pool_id" { 
+    description = <<EOT
+        Specifies the ID of the elastic pool containing this database.
+        Changing this forces a new resource to be created.
+        EOT
+    type = string
+    default = null
+}
+
+
+//--- Private endopoint variables
+//--------------------------------
+variable "vnet_resource_group" { 
+    description = "The name of the resource group in which exists the vnet/subnet where to set network policies disabled."
+    type = string
+}
+
+variable "subnet_id" {
+    description = "The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "private_endpoint_name" {
+    description = "Specifies the Name of the Private Endpoint. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "private_service_connection_name" {
+    description = "Specifies the Name of the Private Service Connection. Changing this forces a new resource to be created."
+    type = string
+    default = "sql_server_private_service_connection_name"
+}
+
+
+//--- Private DNS zone variables
+//-------------------------------
+variable "private_dns_zone_name" {
+    description = "The name of the Private DNS Zone. Must be a valid domain name."
+    type = string
+    default = "privatelink.database.windows.net"
+}
+
+variable "private_dns_zone_vnet_link_name" {
+    description = "The name of the Private DNS Zone Virtual Network Link. Changing this forces a new resource to be created."
+    type = string
+    default = "private_dns_zone_vnet_link"
+}
+
+variable "vnet_id" {
+    description = "The Resource ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "private_dns_zone_config_name" {
+    description = "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+    type = string
+    default = "private_dns_zone_config_name"
+}
+
+variable "private_dns_zone_group_name" {
+    description = "The name of the private dns zone group."
+    type = string
+    default = "private_dns_zone_group_name"
 }

@@ -1,6 +1,6 @@
 //--- Create logical database server if requested
 
-// module.name.server_id
+// TODO: module.name.server_id
 
 // Get server as in key vault (with data source)
 
@@ -13,8 +13,8 @@ resource "azurerm_mssql_database" "singledb" {
     server_id = var.database_server_id
 
     // Optional Terraform resource manager arguments but required by architecture
-    max_size_gb = var.max_size_gb
     sku_name = var.service_tier
+    max_size_gb = var.max_size_gb
     collation = var.collation
     license_type = var.license_type
     tags = var.tags

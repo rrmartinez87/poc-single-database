@@ -3,7 +3,7 @@
 resource "azurerm_key_vault_secret" "secret" {
     
     // Create secret in Azure Key Vault for the server admin password as indicated
-    count = var.create_server_admin_secret ? 1 : 0
+    count = var.create_database_server && var.create_server_admin_secret ? 1 : 0
 
     // Arguments required by Terraform API
     name = var.server_admin_key_vault_secret_name
@@ -13,6 +13,7 @@ resource "azurerm_key_vault_secret" "secret" {
 
     //TODO: tags, activation, expiration?
 }
+
 
 // Get SQL Server Admin secret from Azure key Vault
 data "azurerm_key_vault_secret" "sqladmin" {
@@ -24,6 +25,7 @@ data "azurerm_key_vault_secret" "sqladmin" {
     // If a secret is being created as part of the process take it, otherwise get info from an existing one
     depends_on = [ azurerm_key_vault_secret.secret ]
 }
+
 
 //--- Azure SQL Database Server resource definition
 //--------------------------------------------------
@@ -41,7 +43,7 @@ resource "azurerm_mssql_server" "database_server" {
     azuread_administrator {
         login_username = var.azuread_admin_login
         object_id = var.azuread_admin_object_id
-        tenant_id = var.azuread_tenant_id
+        tenant_id = var.azuread_admin_tenant_id
     }
 
     // Optional Terraform resource manager arguments but required by architecture
@@ -49,6 +51,7 @@ resource "azurerm_mssql_server" "database_server" {
     public_network_access_enabled = local.public_network_access
     tags = var.tags
 }
+
 
 // Set database server TLS version after server creation (unsupported Azure provider argument)
 // TODO: This setting can only be configured once a private enpoint is in place???
@@ -59,8 +62,8 @@ resource "null_resource" "set_tls_version" {
         // PowerShell command to update SQL Server TLS version
         command = <<-EOT
             Set-AzSqlServer `
-                -ServerName ${azurerm_mssql_server.database_server.name} `
-                -ResourceGroupName ${azurerm_mssql_server.database_server.resource_group_name} `
+                -ServerName ${var.server_name} `
+                -ResourceGroupName ${var.resource_group} `
                 -MinimalTlsVersion ${local.tls_version}
         EOT
 

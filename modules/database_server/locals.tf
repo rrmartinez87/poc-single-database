@@ -19,10 +19,4 @@ locals {
 
     // Type of content for the server admin secret.
     server_admin_secret_content_type = "SQL Server Admin"
-    
-  /* TODO:
-  service_endpoints = ["Microsoft.Sql"]
-  enforce_private_link_endpoint_policies = true
-  */
-
 }
