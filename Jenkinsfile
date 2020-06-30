@@ -12,12 +12,13 @@ pipeline {
 
   stage('Az login') {
             steps {
-                withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
+                withCredentials([azureServicePrincipal('jenkins-sp-sql2')]) {
                        sh '''
-                       az account clear
-                       az login -u rafael.martinez@globant.com -p $Az_pass
-                       az account set -s a7b78be8-6f3c-4faf-a43d-285ac7e92a05
-		       sh
+               		$azureAplicationId ="$AZURE_CLIENT_ID"
+			$azureTenantId= "$ZURE_TENANT_ID"
+			$azurePassword = ConvertTo-SecureString "$AZURE_CLIENT_SECRET" -AsPlainText -Force
+			$psCred = New-Object System.Management.Automation.PSCredential($azureAplicationId , $azurePassword)
+			Connect-AzAccount -Credential $psCred -TenantId $azureTenantId  -ServicePrincipal
 		       '''
 			cleanWs()
         }
