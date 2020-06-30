@@ -20,8 +20,7 @@ stage('Az login') {
 	   cleanWs()
 		}
             }
-        }
-	
+        	
         stage('Clone repository') {
         steps {
             git branch: 'master', credentialsId: 'Github', url: 'https://github.com/rrmartinez87/poc-single-database.git'
