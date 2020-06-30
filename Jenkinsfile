@@ -10,16 +10,14 @@ pipeline {
     	
     stages {
 
-        stage('Az login') {
+stage('Az login') {
             steps {
-                withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
-                       sh '''
-                       az account clear
-                       az login -u rafael.martinez@globant.com -p $Az_pass
-                       az account set -s a7b78be8-6f3c-4faf-a43d-285ac7e92a05
-		       sh
-		       '''
-			cleanWs()
+            pwsh "get-date"
+	    pwsh "$User = 'globant\rafael.martinez'"
+	    pwsh "$PWord = ConvertTo-SecureString -String '4420528e-9168-41fa-96c2-b78c99aff30c' -AsPlainText -Force"
+            pwsh "$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord"
+	    pwsh "Connect-AzAccount -Credential $Credential -Tenant 'c160a942-c869-429f-8a96-f8c8296d57db' -ServicePrincipal"
+	   cleanWs()
 		}
             }
         }
