@@ -14,7 +14,7 @@ pipeline {
             steps {
                 withCredentials([azureServicePrincipal('jenkins-sp-sql2')]) {
                         pwsh  "get-date"
-			pwsh  "echo {'$ZURE_TENANT_ID'}"
+			pwsh  "echo {'$AZURE_TENANT_ID'}"
 			pwsh "$azureAplicationId = {'$AZURE_CLIENT_ID'}"
 			pwsh "$azureTenantId= {'$ZURE_TENANT_ID'}"
 			pwsh "$azurePassword = ConvertTo-SecureString {'$AZURE_CLIENT_SECRET'} -AsPlainText -Force"
