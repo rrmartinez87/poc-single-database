@@ -38,11 +38,11 @@ elastic_pool_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceG
 
 //--- Private Endpoint variables
 //-------------------------------
-vnet_resource_group = "rg-sql-support"
+vnet_resource_group = "rg-sql-single-database2"
 private_endpoint_name = "private-endpoint"
-subnet_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-support/providers/Microsoft.Network/virtualNetworks/vnet-endpoint/subnets/subnet-endpoint"
+subnet_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-single-database2/providers/Microsoft.Network/virtualNetworks/vnet-endpoint/subnets/subnet-endpoint"
 private_service_connection_name = "any_optinal_name"
-vnet_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-support/providers/Microsoft.Network/virtualNetworks/vnet-endpoint"
+vnet_id = "/subscriptions/a265068d-a38b-40a9-8c88-fb7158ccda23/resourceGroups/rg-sql-single-database2/providers/Microsoft.Network/virtualNetworks/vnet-endpoint"
 
 //--- DNS configuration
 private_dns_zone_name = "privatelink.database.windows.net"
