@@ -10,15 +10,16 @@ pipeline {
     	
     stages {
 
-stage('Az login') {
+  stage('Az login') {
             steps {
-withCredentials([azureServicePrincipal('jenkins-sp-sql2')])
-withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')])	    
-		    {
-pwsh "$User = 'rafael.martinez@globant.com'"
-pwsh "$PWord = ConvertTo-SecureString -String $Az_pass -AsPlainText -Force"
-pwsh "$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord"
-pwsh "Connect-AzAccount -Credential $Credential -Tenant $ZURE_TENANT_ID -ServicePrincipal"
+                withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
+                       sh '''
+                       az account clear
+                       az login -u rafael.martinez@globant.com -p $Az_pass
+                       az account set -s a7b78be8-6f3c-4faf-a43d-285ac7e92a05
+		       sh
+		       '''
+			cleanWs()
         }
     }
 }
@@ -60,8 +61,8 @@ pwsh "Connect-AzAccount -Credential $Credential -Tenant $ZURE_TENANT_ID -Service
                 -backend-config="container_name=sqlsdtfstate" \
                 -backend-config="access_key=$StorageAccountAccessKey" \
                 -backend-config="key=terraform.tfstate"
-		 terraform plan -no-color -out out.plan
-                 terraform apply -no-color out.plan
+		 pwsh -c "terraform plan -no-color -out out.plan"
+                 pwsh -c "terraform apply -no-color out.plan"
                 '''
             }
         }
