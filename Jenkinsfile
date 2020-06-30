@@ -8,9 +8,22 @@ pipeline {
     }
     agent any
     	
-    stages {
+   stages {
+    stage('Az login') {
+	     steps {
+		withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
+		sh '''
+		az account clear
+		az login -u rafael.martinez@globant.com -p $Az_pass
+		az account set -s a265068d-a38b-40a9-8c88-fb7158ccda23
+		sh
+		'''
+		cleanWs()
+	        }
+    		}	
+		}
 
-  stage('Az login') {
+  stage('Az Account') {
 steps {
              pwsh '''
              $password = ConvertTo-SecureString -String "UxzPCy-xSL.2-aT707dE_T-2_mayDMBm21" -AsPlainText -Force
