@@ -7,7 +7,7 @@ terraform {
     azure = "=2.13.0"
   }*/
 }
-
+/*
 //--- Azure provider configuration
 provider "azurerm" {
     version = "=2.13.0"
@@ -17,7 +17,7 @@ provider "azurerm" {
     
     features {}
 }
-
+*/
 /* TODO: include tenant_id in server params
 data "azurerm_client_config" "current" {
 }
