@@ -12,7 +12,7 @@ pipeline {
 
   stage('Az login') {
             steps {
-withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')])				
+withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) { 				
 pwsh "$User = 'rafael.martinez@globant.com'"
 pwsh "$PWord = ConvertTo-SecureString -String 'Az_pass' -AsPlainText -Force"
 pwsh "$tenant = 'c160a942-c869-429f-8a96-f8c8296d57db'"
