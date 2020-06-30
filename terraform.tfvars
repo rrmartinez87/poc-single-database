@@ -49,3 +49,11 @@ private_dns_zone_name = "privatelink.database.windows.net"
 private_dns_zone_vnet_link_name = "private_dsn_zone_vnet_link"
 private_dns_zone_config_name = "private_dns_zone_config_name"
 private_dns_zone_group_name = "private_dns_zone_group_name"
+
+
+//--- VNet/Subnet
+//----------------
+vnet_name = "vnet-endpoint"
+vnet_address_space = "10.0.0.0/16"
+subnet_name = "subnet-endpoint"
+subnet_address_prefixes = ["10.0.1.0/24"]

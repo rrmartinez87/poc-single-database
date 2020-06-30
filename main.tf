@@ -78,14 +78,37 @@ module "private_endpoint" {
     // Endpoint configuration
     vnet_resource_group = var.vnet_resource_group
     private_endpoint_name = var.private_endpoint_name
-    subnet_id = var.subnet_id
+    subnet_id = module.virtual_network.subnet_id
     private_service_connection_name = var.private_service_connection_name
     database_server_id = module.database_server.server_id
-    vnet_id = var.vnet_id
+    vnet_id = module.virtual_network.vnet_id
     
     // DNS configuration
     private_dns_zone_name = var.private_dns_zone_name
     private_dns_zone_vnet_link_name = var.private_dns_zone_vnet_link_name
     private_dns_zone_config_name = var.private_dns_zone_config_name
     private_dns_zone_group_name = var.private_dns_zone_group_name
+
+    // A private endpoint can only be deployed in a subnet with specific configuration
+
 }
+
+
+//--- Create virtual network/subnet to set up private endpoint
+module "virtual_network" {
+
+    source = "./modules/virtual_network"
+
+    // Set module parameters
+    resource_group = azurerm_resource_group.rg.name
+    location = azurerm_resource_group.rg.location
+    tags = var.tags
+    vnet_name = var.vnet_name
+    vnet_address_space = var.vnet_address_space
+    subnet_name = var.subnet_name
+    subnet_address_prefixes = var.subnet_address_prefixes
+}
+
+
+
+//--- Create Virtual Machine to test database connectivity

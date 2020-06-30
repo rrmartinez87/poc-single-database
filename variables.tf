@@ -216,3 +216,25 @@ variable "private_dns_zone_group_name" {
     type = string
     default = "private_dns_zone_group_name"
 }
+
+
+//--- Virtual Network/Subnet variables
+variable "vnet_name" {
+    description = "The name of the virtual network. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "vnet_address_space" {
+    description = "The address space that is used the virtual network. You can supply more than one address space. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "subnet_name" {
+    description = "The name of the subnet. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "subnet_address_prefixes" {
+    description = "The address prefixes to use for the subnet."
+    type = list(string)
+}
