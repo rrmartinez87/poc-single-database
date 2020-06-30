@@ -57,7 +57,7 @@ resource "azurerm_mssql_server" "database_server" {
 // TODO: This setting can only be configured once a private enpoint is in place???
 resource "null_resource" "set_tls_version" { 
     
-    provisioner local-exec {
+    provisioner remote-exec {
         
         // PowerShell command to update SQL Server TLS version
         command = <<-EOT
