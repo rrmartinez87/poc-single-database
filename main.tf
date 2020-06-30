@@ -7,17 +7,17 @@ terraform {
     azure = "=2.13.0"
   }*/
 }
-/*
+
 //--- Azure provider configuration
 provider "azurerm" {
-    version = "=2.13.0"
-    subscription_id = "a265068d-a38b-40a9-8c88-fb7158ccda23"
-    client_id = "ea7672ef-f009-47fe-8b74-114a7d99b257"
-    tenant_id = "c160a942-c869-429f-8a96-f8c8296d57db"
+    //version = "=2.13.0"
+    //subscription_id = "a265068d-a38b-40a9-8c88-fb7158ccda23"
+    //client_id = "ea7672ef-f009-47fe-8b74-114a7d99b257"
+    //tenant_id = "c160a942-c869-429f-8a96-f8c8296d57db"
     
     features {}
 }
-*/
+
 /* TODO: include tenant_id in server params
 data "azurerm_client_config" "current" {
 }
