@@ -12,10 +12,14 @@ pipeline {
 
   stage('Az login') {
             steps {
-            withCredentials([azureServicePrincipal('jenkins-sp-sql2')]) {
-            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
-            sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
-            sh 'az resource list'
+                withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
+                       sh '''
+                       az account clear
+                       az login -u rafael.martinez@globant.com -p $Az_pass
+                       az account set -s a7b78be8-6f3c-4faf-a43d-285ac7e92a05
+		       sh
+		       '''
+			cleanWs()
         }
     }
 }
