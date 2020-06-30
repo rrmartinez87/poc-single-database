@@ -14,9 +14,9 @@ stage('Az login') {
             steps {
 withCredentials([azureServicePrincipal('jenkins-sp-sql2')]) {
 pwsh "$User = 'rafael.martinez@globant.com'"
-pwsh "$PWord = ConvertTo-SecureString -String $AZURE_CLIENT_SECRET -AsPlainText -Force"
+pwsh "$PWord = ConvertTo-SecureString -String '$AZURE_CLIENT_SECRET' -AsPlainText -Force"
 pwsh "$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord"
-pwsh "Connect-AzAccount -Credential $Credential -Tenant $AZURE_TENANT_ID -ServicePrincipal"
+pwsh "Connect-AzAccount -Credential $Credential -Tenant '$ZURE_TENANT_ID' -ServicePrincipal"
         }
     }
 }
