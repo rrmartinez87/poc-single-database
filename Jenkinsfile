@@ -14,11 +14,11 @@ pipeline {
             steps {
                 withCredentials([azureServicePrincipal('jenkins-sp-sql2')]) {
                        sh '''
-               		$azureAplicationId = {'$AZURE_CLIENT_ID'}
-			$azureTenantId= {'$ZURE_TENANT_ID'}
-			$azurePassword = ConvertTo-SecureString {'$AZURE_CLIENT_SECRET'} -AsPlainText -Force
-			$psCred = New-Object System.Management.Automation.PSCredential($azureAplicationId , $azurePassword)
-			Connect-AzAccount -Credential $psCred -TenantId $azureTenantId  -ServicePrincipal
+               		pwsh $azureAplicationId = {'$AZURE_CLIENT_ID'}
+			pwsh $azureTenantId= {'$ZURE_TENANT_ID'}
+			pwsh $azurePassword = ConvertTo-SecureString {'$AZURE_CLIENT_SECRET'} -AsPlainText -Force
+			pwsh $psCred = New-Object System.Management.Automation.PSCredential($azureAplicationId , $azurePassword)
+			pwsh Connect-AzAccount -Credential $psCred -TenantId $azureTenantId  -ServicePrincipal
 		       '''
 			cleanWs()
         }
