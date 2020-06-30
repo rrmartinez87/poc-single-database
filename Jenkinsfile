@@ -14,6 +14,10 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'RafaelAzPass', variable: 'Az_pass')]) {
                        sh '''
+		       def PowerShell(psCmd) {
+ 		       psCmd=psCmd.replaceAll("%", "%%")
+                       bat "powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command \"\$ErrorActionPreference='Stop';[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;$psCmd;EXIT \$global:LastExitCode\""
+                       }
                        az account clear
                        az login -u rafael.martinez@globant.com -p $Az_pass
                        az account set -s a7b78be8-6f3c-4faf-a43d-285ac7e92a05
