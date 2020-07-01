@@ -10,7 +10,7 @@ tags = {
 
 //--- Database server variables
 //------------------------------
-server_name = "yuma-sqlsvr2"
+server_name = "yuma-sqlsvr-Rafael"
 server_admin_login = "yuma-sqlusr"
 create_server_admin_secret = false
 server_admin_password = "Passw0rd"
@@ -33,7 +33,7 @@ auto_pause_delay_in_minutes = 60 // tf only supports from 60 mins ahead
 min_vcores_capacity = 1
 secondary_replicas_count = 1
 zone_redundant  = false
-elastic_pool_id = "/subscriptions/a7b78be8-6f3c-4faf-a43d-285ac7e92a05/resourceGroups/rg-sql-single-database2/providers/Microsoft.Sql/servers/yuma-sqlsvr2/elasticPools/yuma-elastic"
+elastic_pool_id = "/subscriptions/a7b78be8-6f3c-4faf-a43d-285ac7e92a05/resourceGroups/rg-sql-single-database2/providers/Microsoft.Sql/servers/yuma-sqlsvr-Rafael/elasticPools/yuma-elastic"
 
 
 //--- Private Endpoint variables
