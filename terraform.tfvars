@@ -82,8 +82,4 @@ vnet_id = "/subscriptions/a7b78be8-6f3c-4faf-a43d-285ac7e92a05/resourceGroups/rg
 private_dns_zone_name = "privatelink.database.windows.net"
 private_dns_zone_vnet_link_name = "private_dsn_zone_vnet_link"
 private_dns_zone_config_name = "private_dns_zone_config_name"
-<<<<<<< HEAD
 private_dns_zone_group_name = "private_dns_zone_group_name"
-=======
-private_dns_zone_group_name = "private_dns_zone_group_name"
->>>>>>> c7cab9924edea39ca4239b7821c590aeea36cd7f
