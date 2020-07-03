@@ -22,7 +22,7 @@ azuread_admin_object_id = "adc78f07-0628-4143-aa66-3b69bf3ff237"
 azuread_admin_tenant_id = null
 
 //--- Server logging/auditing variables
-auditing_storage_account_name = "yumaauditingstgacc"
+auditing_storage_account_name = "yumaauditingstgacc2"
 auditing_storage_account_tier = "Standard"
 auditing_storage_account_replication_type = "LRS"
 storage_account_access_key_is_secondary = false
