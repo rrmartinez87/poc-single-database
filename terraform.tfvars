@@ -29,7 +29,7 @@ storage_account_access_key_is_secondary = false
 retention_in_days = 0
 
 //--- Advanced Data Security (ADS) variables
-advanced_data_security_storage_account_name = "yumaadsstgacc"
+advanced_data_security_storage_account_name = "yumaadsstgacc2"
 advanced_data_security_storage_account_tier = "Standard"
 advanced_data_security_storage_account_replication_type = "LRS"
 advanced_data_security_storage_container_name = "yumaadsstgcon"
