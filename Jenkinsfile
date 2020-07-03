@@ -15,7 +15,7 @@ pipeline {
 		sh '''
 		az account clear
 		az login -u rafael.martinez@globant.com -p $Az_pass
-		az account set -s a265068d-a38b-40a9-8c88-fb7158ccda23
+		az account set -s a7b78be8-6f3c-4faf-a43d-285ac7e92a05
 		sh
 		'''
 		cleanWs()
@@ -26,9 +26,9 @@ pipeline {
   stage('Az Account') {
 steps {
              pwsh '''
-             $password = ConvertTo-SecureString -String "UxzPCy-xSL.2-aT707dE_T-2_mayDMBm21" -AsPlainText -Force
-             $Credential = New-Object System.Management.Automation.PSCredential ('c6b8d3e1-b3ca-46fb-93af-d9348f3cd8a5', $password)
-             Connect-AzAccount -Credential $Credential -Tenant 'c160a942-c869-429f-8a96-f8c8296d57db' -ServicePrincipal -Subscription 'a265068d-a38b-40a9-8c88-fb7158ccda23'
+             $password = ConvertTo-SecureString -String "4420528e-9168-41fa-96c2-b78c99aff30c" -AsPlainText -Force
+             $Credential = New-Object System.Management.Automation.PSCredential ('ea7672ef-f009-47fe-8b74-114a7d99b257', $password)
+             Connect-AzAccount -Credential $Credential -Tenant 'c160a942-c869-429f-8a96-f8c8296d57db' -ServicePrincipal -Subscription 'a7b78be8-6f3c-4faf-a43d-285ac7e92a05'
 	     '''
          }
 }
