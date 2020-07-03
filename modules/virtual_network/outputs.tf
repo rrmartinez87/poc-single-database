@@ -4,12 +4,12 @@
 
 output "vnet_id" {
   description = "The virtual network ID."
-  value = azurerm_virtual_network.vnet.id
+  value = var.create_vnet ? azurerm_virtual_network.vnet[0].id : null
   sensitive = false
 }
 
 output "subnet_id" {
   description = "The subnet ID."
-  value = azurerm_subnet.subnet.id
+  value = var.create_vnet ? azurerm_subnet.subnet[0].id : null
   sensitive = false
 }

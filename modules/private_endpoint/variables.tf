@@ -43,10 +43,7 @@ variable "private_service_connection_name" {
 }
 
 variable "database_server_id" { 
-    description = <<EOT
-        The ID of the Private Link Enabled Remote Resource which this Private Endpoint should be connected to.
-        Changing this forces a new resource to be created.
-        EOT
+    description = "The ID of the Private Link Enabled Remote Resource which this Private Endpoint should be connected to. Changing this forces a new resource to be created."
     type = string
 }
 

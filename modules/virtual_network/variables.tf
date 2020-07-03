@@ -22,6 +22,11 @@ variable "tags" {
 
 //--- Virtual Network/Subnet variables
 //-------------------------------------
+variable "create_vnet" { 
+    description = "Flag to indicate whether vnet/subnet should be created or not."
+    type = bool
+}
+
 variable "vnet_name" {
     description = "The name of the virtual network. Changing this forces a new resource to be created."
     type = string

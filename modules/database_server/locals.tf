@@ -19,4 +19,16 @@ locals {
 
     // Type of content for the server admin secret.
     server_admin_secret_content_type = "SQL Server Admin"
+
+    // Advanced Threat Protection is always enable.
+    server_security_alert_policy_state = "Enabled"
+
+    // Threat Protection email administrator accounts is enabled by default.
+    threat_protection_email_admin_account = true
+
+    // Enable Vulnerability Assessment recurring scans by default.
+    vulnerability_assessment_recurring_scans = true
+
+    // Vulnerability Assessment email administrator accounts is enabled by default.
+    vulnerability_assessment_email_account_admins = true
 }

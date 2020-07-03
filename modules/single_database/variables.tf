@@ -2,6 +2,9 @@
   Input variable definitions for an Azure SQL single database resource and its dependences
 */
 
+
+//--- Single database variables
+//------------------------------
 variable "single_database_name" { 
     description = "The name of the Ms SQL Database. Changing this forces a new resource to be created."
     type = string
@@ -96,4 +99,44 @@ variable "elastic_pool_id" {
 variable "tags" { 
     description = "A mapping of tags to assign to the resource."
     type = map
+}
+
+
+//--- Short term backup retention policy variables
+//-------------------------------------------------
+variable "resource_group_name" { 
+    description = "The name of the resource group in which database is created on. This must be the same as the resource group of the underlying SQL server."
+    type = string
+}
+
+variable "short_term_backup_retention_days" { 
+    description = "The backup retention setting, in days. It must be an integer between 1 and 7."
+    type = number
+    default = 7
+}
+
+//--- Long term backup retention policy variables
+//------------------------------------------------
+variable "long_term_backup_weekly_retention" { 
+    description = "The Weekly Retention. If just a number is passed instead of an ISO 8601 string, days will be assumed as the units. There is a minimum of 7 days and a maximum of 10 years."
+    type = string
+    default = "PT0S"
+}
+
+variable "long_term_backup_monthly_retention" { 
+    description = "The Monthly Retention. If just a number is passed instead of an ISO 8601 string, days will be assumed as the units. There is a minimum of 7 days and a maximum of 10 years."
+    type = string
+    default = "PT0S"
+}
+
+variable "long_term_backup_yearly_retention" { 
+    description = "The Yearly Retention. If just a number is passed instead of an ISO 8601 string, days will be assumed as the units. There is a minimum of 7 days and a maximum of 10 years."
+    type = string
+    default = "PT0S"
+}
+
+variable "long_term_backup_week_of_year" { 
+    description = "The Week of Year, 1 to 52, to save for the Yearly Retention."
+    type = number
+    default = 1
 }

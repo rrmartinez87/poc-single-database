@@ -2,6 +2,7 @@
   Input variable definitions for an Azure SQL database server resource and its dependences
 */
 
+
 //--- Common variables
 //---------------------
 variable "resource_group" { 
@@ -18,6 +19,7 @@ variable "tags" {
     description = "A mapping of tags to assign to the resource."
     type = map
 }
+
 
 //--- Database server variables
 //------------------------------
@@ -73,4 +75,67 @@ variable "azuread_admin_tenant_id"  {
     description = "The tenant id of the Azure AD Administrator of this SQL Server."
     type = string
     default = null
+}
+
+
+//--- Logging/auditing storage account variables
+//-----------------------------------------------
+variable "auditing_storage_account_name" { 
+    description = "Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group."
+    type = string
+}
+
+variable "auditing_storage_account_tier" { 
+    description = "Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "auditing_storage_account_replication_type" { 
+    description = "Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS."
+    type = string
+}
+
+variable "storage_account_access_key_is_secondary" { 
+    description = "Specifies whether storage_account_access_key value is the storage's secondary key."
+    type = bool
+    default = false
+}
+
+variable "retention_in_days" { 
+    description = "Specifies the number of days to retain logs for in the storage account. A value of 0 means unlimited."
+    type = number
+    default = 0
+}
+
+
+//--- Advance Data Security (ADS) variables
+//-----------------------------------------------
+variable "advanced_data_security_storage_account_name" { 
+    description = " Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group."
+    type = string
+}
+
+variable "advanced_data_security_storage_account_tier" { 
+    description = "Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "advanced_data_security_storage_account_replication_type" { 
+    description = "Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS."
+    type = string
+}
+
+variable "advanced_data_security_storage_container_name" { 
+    description = "The name of the Container which should be created within the Storage Account."
+    type = string
+}
+
+variable "threat_protection_email_addresses" { 
+    description = "Specifies an array of e-mail addresses to which the alert is sent."
+    type = list(string)
+}
+
+variable "vulnerability_assessment_email_addresses" { 
+    description = "Specifies an array of e-mail addresses to which the scan notification is sent."
+    type = list(string)
 }

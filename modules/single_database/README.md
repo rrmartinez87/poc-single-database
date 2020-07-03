@@ -1,4 +1,4 @@
-Allowed values
+Sku names allowed values
 --------------
 
 BASIC -> Basic
@@ -30,7 +30,7 @@ Zone redundant -> false by default
 
 General Purpose
 ---------------
-  Provisioned ->  2, 4, 6, 8 10, 12, 14, 16, 18, 20, 24, 32, 40, 80 vCores.
+  Provisioned ->  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24, 32, 40, 80 vCores.
     2 - 4 cores -> 1 GB - 1 TB.
     6 - 10 cores -> 1 GB - 1.5 TB.
     12 - 20 cores -> 1 GB - 3 TB.

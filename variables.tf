@@ -77,6 +77,67 @@ variable "azuread_admin_tenant_id"  {
 }
 
 
+//--- Logging/auditing storage account variables
+//-----------------------------------------------
+variable "auditing_storage_account_name" { 
+    description = "Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group."
+    type = string
+}
+
+variable "auditing_storage_account_tier" { 
+    description = "Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "auditing_storage_account_replication_type" { 
+    description = "Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS."
+    type = string
+}
+
+variable "storage_account_access_key_is_secondary" { 
+    description = "Specifies whether storage_account_access_key value is the storage's secondary key."
+    type = bool
+}
+
+variable "retention_in_days" { 
+    description = "Specifies the number of days to retain logs for in the storage account. A value of 0 means unlimited."
+    type = number
+}
+
+
+//--- Advance Data Security (ADS) variables
+//-----------------------------------------------
+variable "advanced_data_security_storage_account_name" { 
+    description = " Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group."
+    type = string
+}
+
+variable "advanced_data_security_storage_account_tier" { 
+    description = "Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created."
+    type = string
+}
+
+variable "advanced_data_security_storage_account_replication_type" { 
+    description = "Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS."
+    type = string
+}
+
+variable "advanced_data_security_storage_container_name" { 
+    description = "The name of the Container which should be created within the Storage Account."
+    type = string
+}
+
+variable "threat_protection_email_addresses" { 
+    description = "Specifies an array of e-mail addresses to which the alert is sent."
+    type = list(string)
+}
+
+variable "vulnerability_assessment_email_addresses" { 
+    description = "Specifies an array of e-mail addresses to which the scan notification is sent."
+    type = list(string)
+}
+
+
 //--- Single database variables
 //-----------------------------
 variable "single_database_name" { 
@@ -85,11 +146,11 @@ variable "single_database_name" {
 }
 
 variable "service_tier" { 
-    description = <<EOT
-        Specifies the name of the sku used by the database. Changing this forces a new resource to be created.
-        For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0, P2 ,DW100c, DS100.
-        Please refer to module README.md for additional information on how to use this parameter.
-        EOT
+    description = <<DESC
+            Specifies the name of the sku used by the database. Changing this forces a new resource to be created.
+            For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0, P2 ,DW100c, DS100.
+            Please refer to module README.md for additional information on how to use this parameter.
+        DESC
     type = string
 }
 
@@ -106,59 +167,92 @@ variable "collation" {
 }
 
 variable "license_type" { 
-    description = <<EOT
-        Specifies the license type applied to this database. Possible values are LicenseIncluded
-        (Azure Hybrid Benefit included) and BasePrice (Azure Hybrid Benefit not included).
-        EOT
+    description = <<DESC
+            Specifies the license type applied to this database. Possible values are LicenseIncluded
+            (Azure Hybrid Benefit included) and BasePrice (Azure Hybrid Benefit not included).
+        DESC
     type = string
     default = "BasePrice"
 }
 
 variable "auto_pause_delay_in_minutes" { 
-    description = <<EOT
-        Time in minutes after which database is automatically paused. A value of -1 means that automatic
-        pause is disabled. This property is only settable for General Purpose Serverless databases.
-        EOT
+    description = <<DESC
+            Time in minutes after which database is automatically paused. A value of -1 means that automatic
+            pause is disabled. This property is only settable for General Purpose Serverless databases.
+        DESC
     type = number
     default = -1
 }
 
 variable "min_vcores_capacity" { 
-    description = <<EOT
+    description = <<DESC
         Minimal vCores capacity that database will always have allocated, if not paused.
         This property is only settable for General Purpose Serverless databases.
-        EOT
+        DESC
     type = number
     default = null
 }
 
 variable "secondary_replicas_count" { 
-    description = <<EOT
+    description = <<DESC
         The number of readonly secondary replicas associated with the database to which readonly
         application intent connections may be routed. This property is only settable for
         Hyperscale edition databases.
-        EOT
+        DESC
     type = number
     default = 0
 }
 
 variable "zone_redundant" { 
-    description = <<EOT
-        Whether or not this database is zone redundant, which means the replicas of this database
-        will be spread across multiple availability zones. This property is only settable for
-        Premium and Business Critical databases.
-        EOT
+    description = <<DESC
+            Whether or not this database is zone redundant, which means the replicas of this database
+            will be spread across multiple availability zones. This property is only settable for
+            Premium and Business Critical databases.
+        DESC
     type = bool
     default = false
 }
 
 variable "elastic_pool_id" { 
-    description = <<EOT
-        Specifies the ID of the elastic pool containing this database.
-        Changing this forces a new resource to be created.
-        EOT
+    description = <<DESC
+            Specifies the ID of the elastic pool containing this database.
+            Changing this forces a new resource to be created.
+        DESC
     type = string
     default = null
+}
+
+
+//--- Short term backup retention policy variables
+variable "short_term_backup_retention_days" { 
+    description = "The backup retention setting, in days. It must be an integer between 1 and 7."
+    type = number
+}
+
+
+//--- Long term backup retention policy variables
+variable "long_term_backup_weekly_retention" { 
+    description = "The Weekly Retention. If just a number is passed instead of an ISO 8601 string, days will be assumed as the units. There is a minimum of 7 days and a maximum of 10 years."
+    type = string
+    default = "PT0S"
+}
+
+variable "long_term_backup_monthly_retention" { 
+    description = "The Monthly Retention. If just a number is passed instead of an ISO 8601 string, days will be assumed as the units. There is a minimum of 7 days and a maximum of 10 years."
+    type = string
+    default = "PT0S"
+}
+
+variable "long_term_backup_yearly_retention" { 
+    description = "The Yearly Retention. If just a number is passed instead of an ISO 8601 string, days will be assumed as the units. There is a minimum of 7 days and a maximum of 10 years."
+    type = string
+    default = "PT0S"
+}
+
+variable "long_term_backup_week_of_year" { 
+    description = "The Week of Year, 1 to 52, to save for the Yearly Retention."
+    type = number
+    default = 1
 }
 
 
@@ -219,6 +313,12 @@ variable "private_dns_zone_group_name" {
 
 
 //--- Virtual Network/Subnet variables
+//-------------------------------------
+variable "create_vnet" { 
+    description = "Flag to indicate whether vnet/subnet should be created or not."
+    type = bool
+}
+
 variable "vnet_name" {
     description = "The name of the virtual network. Changing this forces a new resource to be created."
     type = string
